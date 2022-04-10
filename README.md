@@ -1,6 +1,6 @@
 # Receptor
 
-- Simple app for tracking recipes. First attempt to use pointfree composable architcture https://github.com/pointfreeco/swift-composable-architecture.
+- Simple app for tracking recipes. First attempt to use pointfree composable architecture https://github.com/pointfreeco/swift-composable-architecture.
 
 ## TODO
 
