@@ -10,3 +10,4 @@
 - Image caching and better savings of images
 - Missing rating for recipes
 - Make adding recipe steps better
+- Revise gitignore
