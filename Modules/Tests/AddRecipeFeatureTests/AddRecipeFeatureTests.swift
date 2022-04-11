@@ -47,36 +47,38 @@ class AddRecipeFeatureTests: XCTestCase {
         }
 
         testStore.send(.nutritionPicker(.set(\.$nutritionType, .fiber))) {
-            $0.nutritionsState.nutritionType = .fiber
+            $0.form.nutritionsState.nutritionType = .fiber
         }
 
         testStore.send(.nutritionPicker(.set(\.$weight, "20"))) {
-            $0.nutritionsState.weight = "20"
+            $0.form.nutritionsState.weight = "20"
         }
 
         testStore.send(.imagePicker(.setImage(image: UIImage()))) {
-            $0.imagePickerState.image = UIImage()
+            $0.form.imagePickerState.image = UIImage()
         }
 
         testStore.receive(.imagePicker(.showImagePicker(isPresented: false)))
 
         testStore.send(.nutritionPicker(.addNutritionTapped)) {
-            $0.nutritionsState.nutritions = [
+            $0.form.nutritionsState.nutritions = [
                 .init(
                     id: UUID(uuidString: "00000000-0000-0000-0000-000000000000")!,
                     type: .fiber,
                     weight: 20
                 )
             ]
-            $0.nutritionsState.weight = ""
-            $0.nutritionsState.nutritionType = .fat
+            $0.form.nutritionsState.weight = ""
+            $0.form.nutritionsState.nutritionType = .fat
         }
 
         testStore.send(.saveButtonTapped) {
+            $0.isSavingRecipe = true
             $0.recipeToSave = .filledRecipe
         }
 
         testStore.receive(.recipeSaved(.success(.filledRecipe))) {
+            $0.isSavingRecipe = false
             $0.recipes.append(.filledRecipe)
             $0.recipeToSave = nil
             $0.isPresented = false
